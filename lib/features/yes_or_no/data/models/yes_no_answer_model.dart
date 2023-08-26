@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'yes_no_answer_model.g.dart';
 
 @JsonSerializable()
-class YesNoAnswerModel {
+class YesNoAnswerModel extends Equatable {
   const YesNoAnswerModel({
     required this.answer,
     required this.forced,
@@ -18,4 +19,7 @@ class YesNoAnswerModel {
   final String image;
 
   Map<String, dynamic> toJson() => _$YesNoAnswerModelToJson(this);
+
+  @override
+  List<Object?> get props => [answer, forced, image];
 }

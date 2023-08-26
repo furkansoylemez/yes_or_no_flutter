@@ -6,7 +6,7 @@ import 'package:yes_or_no/features/yes_or_no/data/models/yes_no_answer_model.dar
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  const yesNoAnswerModel = YesNoAnswerModel(
+  const tYesNoAnswerModel = YesNoAnswerModel(
     answer: 'yes',
     forced: false,
     image:
@@ -22,7 +22,7 @@ void main() {
         // act
         final result = YesNoAnswerModel.fromJson(jsonMap);
         // assert
-        expect(result, isA<YesNoAnswerModel>());
+        expect(result, tYesNoAnswerModel);
       },
     );
 
@@ -30,7 +30,7 @@ void main() {
       'toJson should return a JSON map containing the proper data',
       () {
         // act
-        final result = yesNoAnswerModel.toJson();
+        final result = tYesNoAnswerModel.toJson();
         // assert
         final expectedMap = {
           'answer': 'yes',
