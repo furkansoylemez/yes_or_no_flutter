@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class Answer extends Equatable {
-  const Answer({required this.answer, required this.imageUrl});
+class YesNoAnswer extends Equatable {
+  const YesNoAnswer({required this.answer, required this.imageUrl});
 
   final String answer;
   final String imageUrl;

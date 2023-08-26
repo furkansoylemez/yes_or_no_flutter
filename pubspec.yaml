@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+  dartz: ^0.10.1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -15,6 +16,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.0
   very_good_analysis: ^5.0.0+1
 
 flutter:
