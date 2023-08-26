@@ -1,20 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:yes_or_no/app/app.dart';
+import 'package:yes_or_no/injection_container.dart' as di;
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  di.init();
+  runApp(const YesOrNoApp());
 }
