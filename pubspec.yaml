@@ -31,6 +31,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.7.1
   mocktail: ^1.0.0
+  network_image_mock: ^2.1.1
   retrofit_generator: ^7.0.8
   very_good_analysis: ^5.0.0+1
 
