@@ -1,5 +1,7 @@
 {
+  "defaultFailureMessage": "An error occurred.",
   "questionFieldHint": "Ask a question",
+  "serverFailureMessage": "An error occurred while communicating with the server.",
   "submitButtonLabel": "Get answer",
   "yesOrNo": "Yes or No?"
 }

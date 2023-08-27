@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:yes_or_no/core/extensions/app_localizations.dart';
+import 'package:yes_or_no/core/extensions/snackbar.dart';
 import 'package:yes_or_no/features/yes_or_no/presentation/bloc/answer_bloc.dart';
 import 'package:yes_or_no/features/yes_or_no/presentation/widgets/widgets.dart';
 
@@ -37,6 +38,9 @@ class _YesOrNoViewState extends State<YesOrNoView> {
           listener: (context, state) {
             if (state.status == FormzSubmissionStatus.success) {
               _clear();
+            }
+            if (state.status == FormzSubmissionStatus.failure) {
+              context.showFailureSnackbar(state.failure);
             }
           },
           builder: (context, state) {

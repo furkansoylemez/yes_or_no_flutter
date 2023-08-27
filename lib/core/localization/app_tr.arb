@@ -1,5 +1,7 @@
 {
+  "defaultFailureMessage": "An error occurred.",
   "questionFieldHint": "Bir soru sor",
+  "serverFailureMessage": "An error occurred while communicating with the server.",
   "submitButtonLabel": "Cevabı al",
   "yesOrNo": "Evet mi Hayır mı?"
 }
