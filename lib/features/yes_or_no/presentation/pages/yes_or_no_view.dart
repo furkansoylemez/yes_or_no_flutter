@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:yes_or_no/core/extensions/app_localizations.dart';
 import 'package:yes_or_no/features/yes_or_no/presentation/bloc/answer_bloc.dart';
 import 'package:yes_or_no/features/yes_or_no/presentation/widgets/widgets.dart';
 
@@ -26,7 +27,7 @@ class _YesOrNoViewState extends State<YesOrNoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Yes or No'),
+        title: Text(context.l10n.yesOrNo),
       ),
       body: Center(
         child: BlocConsumer<AnswerBloc, AnswerState>(

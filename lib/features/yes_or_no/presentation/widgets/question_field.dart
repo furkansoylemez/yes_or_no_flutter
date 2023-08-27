@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yes_or_no/core/extensions/app_localizations.dart';
 
 class QuestionField extends StatelessWidget {
   const QuestionField({
@@ -14,10 +15,10 @@ class QuestionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(),
-        hintText: 'Ask a question',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        enabledBorder: const OutlineInputBorder(),
+        hintText: context.l10n.questionFieldHint,
       ),
       onChanged: onChanged,
     );
