@@ -123,7 +123,7 @@ emits [AnswerState] with empty question and
       );
 
       blocTest<AnswerBloc, AnswerState>(
-        'emits failed [AnswerState] if failure return when QuestionSubmitted is added.',
+        '''emits failed [AnswerState] if failure return when QuestionSubmitted is added.''',
         setUp: () {
           when(() => mockGetAnswer(any()))
               .thenAnswer((_) async => Left(ServerFailure()));

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:yes_or_no/features/yes_or_no/presentation/bloc/answer_bloc.dart';
+import 'package:yes_or_no/features/yes_or_no/presentation/widgets/widgets.dart';
 
 class YesOrNoView extends StatefulWidget {
   const YesOrNoView({super.key});
@@ -46,27 +47,22 @@ class _YesOrNoViewState extends State<YesOrNoView> {
                     if (state.status == FormzSubmissionStatus.inProgress)
                       const LinearProgressIndicator(),
                     if (state.status == FormzSubmissionStatus.success) ...[
-                      Text(state.lastQuestion),
+                      LastQuestion(
+                        lastQuestion: state.lastQuestion,
+                      ),
                       const SizedBox(height: 8),
-                      Image.network(state.answer?.imageUrl ?? ''),
+                      LastAnswer(
+                        imageUrl: state.answer?.imageUrl,
+                      ),
                       const SizedBox(height: 24),
                     ],
-                    TextFormField(
+                    QuestionField(
                       controller: _controller,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(),
-                        hintText: 'Ask a question',
-                      ),
                       onChanged: _questionChanged,
                     ),
                     const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton(
-                        onPressed: state.isValid ? _submit : null,
-                        child: const Text('Get answer'),
-                      ),
+                    SubmitButton(
+                      onPressed: state.isValid ? _submit : null,
                     ),
                   ],
                 ),
