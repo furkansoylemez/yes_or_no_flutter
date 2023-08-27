@@ -34,8 +34,9 @@ void main() {
       answerBloc = AnswerBloc(getAnswer: mockGetAnswer);
       final state = answerBloc.state;
       expect(state.question, const Question.pure());
+      expect(state.lastQuestion, '');
       expect(state.answer, null);
-      expect(state.errorMessage, null);
+      expect(state.failure, null);
       expect(state.status, FormzSubmissionStatus.initial);
       expect(state.isValid, false);
     });
@@ -112,7 +113,9 @@ emits [AnswerState] with empty question and
             'status',
             FormzSubmissionStatus.inProgress,
           ),
-          isA<AnswerState>().having((s) => s.answer, 'answer', tYesNoAnswer)
+          isA<AnswerState>()
+              .having((s) => s.answer, 'answer', tYesNoAnswer)
+              .having((s) => s.lastQuestion, 'lastQuestion', 'test')
         ],
         verify: (_) {
           verify(() => mockGetAnswer(any())).called(1);

@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:yes_or_no/core/error/failures.dart';
 import 'package:yes_or_no/core/usecases/usecase.dart';
 import 'package:yes_or_no/features/yes_or_no/domain/entities/question.dart';
 import 'package:yes_or_no/features/yes_or_no/domain/entities/yes_no_answer.dart';
@@ -47,7 +48,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
         emit(
           state.copyWith(
             status: FormzSubmissionStatus.failure,
-            errorMessage: 'Something went wrong when getting the answer',
+            failure: failure,
           ),
         );
       },
@@ -55,6 +56,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
         emit(
           state.copyWith(
             status: FormzSubmissionStatus.success,
+            lastQuestion: state.question.value,
             answer: answer,
           ),
         );

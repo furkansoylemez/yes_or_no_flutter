@@ -13,13 +13,7 @@ class YesOrNoView extends StatefulWidget {
 }
 
 class _YesOrNoViewState extends State<YesOrNoView> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    _controller = TextEditingController();
-    super.initState();
-  }
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -34,45 +28,50 @@ class _YesOrNoViewState extends State<YesOrNoView> {
         title: const Text('Yes or No'),
       ),
       body: Center(
-        child: BlocBuilder<AnswerBloc, AnswerState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case FormzSubmissionStatus.inProgress:
-                return const CircularProgressIndicator();
-              default:
-                return Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _controller,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            enabledBorder: OutlineInputBorder(),
-                            hintText: 'Ask a question',
-                          ),
-                          onChanged: _questionChanged,
-                        ),
-                        const SizedBox(height: 8),
-                        SizedBox(
-                          width: double.infinity,
-                          child: FilledButton(
-                            onPressed: state.isValid ? _submitAndClear : null,
-                            child: const Text('Get answer'),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        if (state.status == FormzSubmissionStatus.success) ...[
-                          Text(state.answer?.answer ?? ''),
-                          const SizedBox(height: 8),
-                          Image.network(state.answer?.imageUrl ?? '')
-                        ]
-                      ],
-                    ),
-                  ),
-                );
+        child: BlocConsumer<AnswerBloc, AnswerState>(
+          listenWhen: (previous, current) {
+            return previous.status != current.status;
+          },
+          listener: (context, state) {
+            if (state.status == FormzSubmissionStatus.success) {
+              _clear();
             }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    if (state.status == FormzSubmissionStatus.inProgress)
+                      const LinearProgressIndicator(),
+                    if (state.status == FormzSubmissionStatus.success) ...[
+                      Text(state.lastQuestion),
+                      const SizedBox(height: 8),
+                      Image.network(state.answer?.imageUrl ?? ''),
+                      const SizedBox(height: 24),
+                    ],
+                    TextFormField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(),
+                        hintText: 'Ask a question',
+                      ),
+                      onChanged: _questionChanged,
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        onPressed: state.isValid ? _submit : null,
+                        child: const Text('Get answer'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           },
         ),
       ),
@@ -83,8 +82,11 @@ class _YesOrNoViewState extends State<YesOrNoView> {
     context.read<AnswerBloc>().add(QuestionChanged(value));
   }
 
-  void _submitAndClear() {
+  void _submit() {
     context.read<AnswerBloc>().add(const QuestionSubmitted());
+  }
+
+  void _clear() {
     _controller.clear();
     context.read<AnswerBloc>().add(const QuestionChanged(''));
   }

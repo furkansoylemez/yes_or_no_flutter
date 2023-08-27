@@ -33,7 +33,6 @@ void init() {
     )
 
     // Mappers
-
     ..registerLazySingleton(
       YesNoAnswerMapper.new,
     )
